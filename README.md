@@ -24,7 +24,6 @@ de modo que dos corridas producen resultados idénticos.
 | `verificacion.py` | Pruebas contra resultados conocidos sin simular |
 | `sensibilidad.py` | Barridos de parámetros y generación de figuras |
 | `tabla_parametros.py` | Emite la tabla de parámetros en LaTeX desde el código |
-| `resultados.tex` | Sección de resultados redactada, con los números de esta corrida |
 | `figuras/` | Figuras en PDF vectorial, dimensionadas para columna IEEE |
 
 ## Convenciones
