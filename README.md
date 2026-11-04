@@ -1,5 +1,22 @@
 # Simulador de canal VLC asistido por IRS de espejos
 
+## Modelo predictivo CNN-GRU
+
+El controlador hibrido, entrenamiento por imitacion, baselines causales y
+ablaciones estan implementados. Instrucciones, parametros provisionales,
+limitaciones y protocolo: [MODELO_PREDICTIVO.md](MODELO_PREDICTIVO.md).
+
+```bash
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python entrenar.py --output resultados/experimento_nuevo --noise-sweep
+```
+
+La evaluacion separa trayectorias de entrenamiento/validacion/test y guarda
+pesos, metricas, trazas y figuras. Son datos sinteticos en una geometria fija.
+
+## Simulacion fisica original
+
 Implementación numérica del modelo de canal para el Hito 2, con las pruebas de
 verificación y los barridos de sensibilidad que generan las figuras del informe.
 
