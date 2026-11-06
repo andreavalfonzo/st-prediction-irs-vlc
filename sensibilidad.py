@@ -108,7 +108,7 @@ def sigma_media_ganancia(esc, rx=RX_REF, n_real=120, rng=None):
 # ---------------------------------------------------------------------
 
 def barrido_semiangulo():
-    print("  [1/7] semiángulo de media potencia")
+    print("  [1/7] Half-power semiangle")
     semis = np.linspace(15.0, 75.0, 25)
     punto, media = [], []
     for s in semis:
@@ -118,10 +118,10 @@ def barrido_semiangulo():
     punto, media = np.array(punto), np.array(media)
 
     fig, ax = plt.subplots(figsize=UNA_COL)
-    ax.plot(semis, punto, label="Receptor de referencia")
-    ax.plot(semis, media, "--", label="Promedio sobre la sala")
-    ax.set_xlabel(r"Semiángulo de media potencia $\phi_{1/2}$ [grados]")
-    ax.set_ylabel("Tasa del enlace directo [bits/s/Hz]")
+    ax.plot(semis, punto, label="Reference Receiver")
+    ax.plot(semis, media, "--", label="Room Average")
+    ax.set_xlabel(r"Semiángulo de media potencia $\phi_{1/2}$ [degrees]")
+    ax.set_ylabel("Direct link rate [bits/s/Hz]")
     ax.legend()
     guardar(fig, "sens_semiangulo.pdf")
     return semis, punto, media
@@ -132,7 +132,7 @@ def barrido_semiangulo():
 # ---------------------------------------------------------------------
 
 def barrido_fov():
-    print("  [2/7] campo de visión")
+    print("  [2/7] Field of View")
     fovs = np.linspace(20.0, 85.0, 27)
     punto, media, via_irs = [], [], []
     for f in fovs:
@@ -144,11 +144,11 @@ def barrido_fov():
     punto, media, via_irs = map(np.array, (punto, media, via_irs))
 
     fig, ax = plt.subplots(figsize=UNA_COL)
-    ax.plot(fovs, punto, label="Directo, receptor de ref.")
-    ax.plot(fovs, media, "--", label="Directo, promedio sala")
-    ax.plot(fovs, via_irs, ":", label="Vía IRS, receptor de ref.")
-    ax.set_xlabel(r"Campo de visión $\Psi_c$ [grados]")
-    ax.set_ylabel("Tasa alcanzable [bits/s/Hz]")
+    ax.plot(fovs, punto, label="Direct, reference receiver")
+    ax.plot(fovs, media, "--", label="Direct, room average")
+    ax.plot(fovs, via_irs, ":", label="With IRS, reference receiver")
+    ax.set_xlabel(r"Campo de visión $\Psi_c$ [degrees]")
+    ax.set_ylabel("achievable rate [bits/s/Hz]")
     ax.legend()
     guardar(fig, "sens_fov.pdf")
     return fovs, punto, media, via_irs
@@ -159,7 +159,7 @@ def barrido_fov():
 # ---------------------------------------------------------------------
 
 def barrido_n_espejos():
-    print("  [3/7] número de espejos")
+    print("  [3/7] number of mirrors")
     lados = np.array([2, 3, 5, 7, 10, 14, 20, 28, 40, 56, 80])
     rng = np.random.default_rng(SEMILLA)
     n_tot, tasas, sigmas, radios = [], [], [], []
@@ -176,15 +176,15 @@ def barrido_n_espejos():
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=UNA_COL_ALTA, sharex=True)
     ax1.plot(n_tot, tasas, marker="o", markersize=3)
     ax1.set_xscale("log")
-    ax1.set_ylabel("Tasa vía IRS [bits/s/Hz]")
-    ax1.set_title("(a) Ganancia")
+    ax1.set_ylabel("IRS rate [bits/s/Hz]")
+    ax1.set_title("(a) Gain")
 
     ax2.plot(n_tot, sigmas, marker="s", markersize=3, color="C1")
     ax2.set_xscale("log")
     ax2.set_yscale("log")
     ax2.set_xlabel(r"Número de espejos $N$ (área del panel constante)")
     ax2.set_ylabel(r"$\sigma$ que reduce $H_{\mathrm{IRS}}$ a la mitad [$^\circ$]")
-    ax2.set_title("(b) Tolerancia al error de apuntamiento")
+    ax2.set_title("(b) Tolerance to pointing error")
     guardar(fig, "sens_n_espejos.pdf")
     return n_tot, tasas, sigmas, radios
 
@@ -194,7 +194,7 @@ def barrido_n_espejos():
 # ---------------------------------------------------------------------
 
 def barrido_reflectividad():
-    print("  [4/7] reflectividad")
+    print("  [4/7] reflectivity")
     rhos = np.linspace(0.5, 1.0, 51)
     tasas = np.array([
         rv.tasa(esc := rv.Escenario(reflectividad=r),
@@ -205,7 +205,7 @@ def barrido_reflectividad():
     fig, ax = plt.subplots(figsize=UNA_COL)
     ax.plot(rhos, tasas)
     ax.set_xlabel(r"Reflectividad del espejo $\rho$")
-    ax.set_ylabel("Tasa vía IRS [bits/s/Hz]")
+    ax.set_ylabel("IRS rate [bits/s/Hz]")
     guardar(fig, "sens_reflectividad.pdf")
     return rhos, tasas
 
@@ -215,7 +215,7 @@ def barrido_reflectividad():
 # ---------------------------------------------------------------------
 
 def barrido_error_apuntamiento(n_real=400):
-    print("  [5/7] error de apuntamiento")
+    print("  [5/7] pointing error")
     rng = np.random.default_rng(SEMILLA)
     esc = rv.Escenario()
     alpha, beta = rv.angulos_optimos(esc, RX_REF)
@@ -238,7 +238,7 @@ def barrido_error_apuntamiento(n_real=400):
     ax.fill_between(sigmas, p10, p90, alpha=0.2, linewidth=0,
                     label="Percentiles 10--90")
     ax.plot(sigmas, media, label="Media")
-    ax.set_xlabel(r"Desviación del error de apuntamiento $\sigma$ [grados]")
+    ax.set_xlabel(r"Desviación del error de apuntamiento $\sigma$ [degrees]")
     ax.set_ylabel(r"$H_{\mathrm{IRS}}$ normalizada")
     ax.set_ylim(0, 1.05)
     ax.legend()
@@ -251,7 +251,7 @@ def barrido_error_apuntamiento(n_real=400):
 # ---------------------------------------------------------------------
 
 def mapa_cobertura(paso=0.10):
-    print("  [6/7] mapa de cobertura")
+    print("  [6/7] coverage map")
     esc = rv.Escenario()
     xs = np.arange(paso / 2, esc.sala[0], paso)
     ys = np.arange(paso / 2, esc.sala[1], paso)
@@ -275,9 +275,9 @@ def mapa_cobertura(paso=0.10):
 
     vmax = max(t_libre.max(), t_bloq_irs.max())
     fig, axes = plt.subplots(1, 3, figsize=DOS_COL)
-    paneles = [(t_libre, "(a) Sin bloqueo, solo directo"),
-               (t_bloq, "(b) Con bloqueo, solo directo"),
-               (t_bloq_irs, "(c) Con bloqueo, directo + IRS")]
+    paneles = [(t_libre, "(a) No blocking, just direct"),
+               (t_bloq, "(b) Blocking, just direct"),
+               (t_bloq_irs, "(c) Blocking, direct + IRS")]
     for ax, (Z, titulo) in zip(axes, paneles):
         im = ax.imshow(Z.T, origin="lower", aspect="equal", vmin=0, vmax=vmax,
                        extent=[0, esc.sala[0], 0, esc.sala[1]], cmap="viridis")
@@ -288,7 +288,7 @@ def mapa_cobertura(paso=0.10):
         ax.set_xlabel("x [m]")
         ax.grid(False)
     axes[0].set_ylabel("y [m]")
-    fig.colorbar(im, ax=axes, label="Tasa [bits/s/Hz]", shrink=0.9)
+    fig.colorbar(im, ax=axes, label="Rate [bits/s/Hz]", shrink=0.9)
     guardar(fig, "mapa_cobertura.pdf")
     return t_libre, t_bloq, t_bloq_irs, mascara_bloq
 
@@ -298,7 +298,7 @@ def mapa_cobertura(paso=0.10):
 # ---------------------------------------------------------------------
 
 def barrido_retardo(velocidades=(0.5, 1.0, 1.5), t_max=0.30, n_pasos=40):
-    print("  [7/7] retardo de actuación")
+    print("  [7/7] attenuation delay")
     esc = rv.Escenario()
     retardos = np.linspace(0.0, t_max, 31)
     y0, z0 = 2.5, esc.altura_dispositivo
@@ -329,11 +329,11 @@ def barrido_retardo(velocidades=(0.5, 1.0, 1.5), t_max=0.30, n_pasos=40):
         ax2.plot(retardos * 1e3, tasa_med[v], label=f"$v$ = {v:.1f} m/s")
     ax1.set_ylabel(r"$H_{\mathrm{IRS}}$ normalizada")
     ax1.set_ylim(0, 1.05)
-    ax1.set_title("(a) Ganancia del canal")
+    ax1.set_title("(a) Channel gain")
     ax1.legend()
     ax2.set_xlabel(r"Retardo de actuación $\tau$ [ms]")
-    ax2.set_ylabel("Tasa media [bits/s/Hz]")
-    ax2.set_title("(b) Tasa alcanzable")
+    ax2.set_ylabel("Media rate [bits/s/Hz]")
+    ax2.set_title("(b) achievable rate")
     guardar(fig, "sens_retardo.pdf")
     return retardos, ganancia, tasa_med
 
@@ -341,7 +341,7 @@ def barrido_retardo(velocidades=(0.5, 1.0, 1.5), t_max=0.30, n_pasos=40):
 # ---------------------------------------------------------------------
 
 def main():
-    print("Análisis de sensibilidad del canal RIS-VLC")
+    print("Sensitivity Analysis of the RIS-VLC Channel")
     print("-" * 56)
 
     semis, p_s, m_s = barrido_semiangulo()
@@ -354,55 +354,55 @@ def main():
 
     esc = rv.Escenario()
     print("\n" + "-" * 56)
-    print("Resumen cuantitativo")
+    print("Quantitative Summary")
     print("-" * 56)
-    print(f"Sala {esc.sala[0]:.0f}x{esc.sala[1]:.0f}x{esc.sala[2]:.0f} m; "
-          f"panel {esc.area_panel:.2f} m^2; N = {esc.n_total} espejos "
-          f"(radio equivalente {esc.radio_espejo * 1e3:.0f} mm)")
-    print(f"Receptor de referencia {RX_REF.tolist()}, "
-          f"bloqueador en {BLOQUEADOR[:2].tolist()}")
+    print(f"Room {esc.sala[0]:.0f}x{esc.sala[1]:.0f}x{esc.sala[2]:.0f} m; "
+          f"panel {esc.area_panel:.2f} m^2; N = {esc.n_total} mirrors "
+          f"(equivalent radio {esc.radio_espejo * 1e3:.0f} mm)")
+    print(f"Reference receiver {RX_REF.tolist()}, "
+          f"blockage in {BLOQUEADOR[:2].tolist()}")
 
-    print(f"\n[1] Semiángulo óptimo en el punto de referencia: "
+    print(f"\n[1] Optimal semi-angle at the reference point: "
           f"{semis[np.argmax(p_s)]:.0f}°")
-    print(f"    Semiángulo óptimo en promedio sobre la sala:  "
+    print(f"    Optimal average semi-angle for the room:  "
           f"{semis[np.argmax(m_s)]:.0f}°")
 
-    print(f"\n[2] FoV óptimo, directo en el punto: {fovs[np.argmax(p_f)]:.0f}°; "
-          f"promedio sala: {fovs[np.argmax(m_f)]:.0f}°; "
-          f"vía IRS: {fovs[np.argmax(i_f)]:.0f}°")
+    print(f"\n[2] Optimal field of view, right on target: {fovs[np.argmax(p_f)]:.0f}°; "
+          f"room average: {fovs[np.argmax(m_f)]:.0f}°; "
+          f"via IRS: {fovs[np.argmax(i_f)]:.0f}°")
 
-    print(f"\n[3] Ganancia y tolerancia frente a N:")
+    print(f"\n[3] Gain and tolerance relative to N:")
     for n, t, s, r in zip(n_tot, t_n, sig_n, rad_n):
         print(f"      N = {n:5d}  radio = {r * 1e3:6.1f} mm  "
-              f"tasa = {t:5.2f} b/s/Hz  sigma_50 = {s:5.2f}°")
+              f"rate = {t:5.2f} b/s/Hz  sigma_50 = {s:5.2f}°")
 
-    print(f"\n[4] Reflectividad: la tasa cae "
-          f"{t_rho[-1] - t_rho[0]:.2f} b/s/Hz al pasar de rho = 1.0 a 0.5")
+    print(f"\n[4] Reflectivity: The Rate Falls "
+          f"{t_rho[-1] - t_rho[0]:.2f} b/s/Hz as rho changes from 1.0 to 0.5")
 
     i50 = int(np.argmin(np.abs(med_sig - 0.5)))
-    print(f"\n[5] Error de apuntamiento que reduce la ganancia a la mitad: "
+    print(f"\n[5] Pointing error that cuts the gain in half: "
           f"sigma = {sig[i50]:.2f}°")
 
     n_bloq = int(np.count_nonzero(masc))
     if n_bloq:
         rec = 100.0 * np.mean(t_bloq_irs[masc] > 0.5 * t_libre[masc])
-        print(f"\n[6] El bloqueador deja sin LoS el "
-              f"{100.0 * n_bloq / masc.size:.1f}% del área.")
-        print(f"    En esa zona el IRS recupera al menos la mitad de la tasa "
-              f"original en el {rec:.0f}% de los puntos.")
-        print(f"    Tasa media en la zona bloqueada: "
-              f"{t_bloq[masc].mean():.2f} sin IRS  ->  "
-              f"{t_bloq_irs[masc].mean():.2f} con IRS  [b/s/Hz]")
+        print(f"\n[6] The blocker cuts off the line of sight to the "
+              f"{100.0 * n_bloq / masc.size:.1f}% of the area.")
+        print(f"    In that area, the IRS collects at least half of the rate "
+              f"original in {rec:.0f}% of the points.")
+        print(f"    Average rate in the blocked area: "
+              f"{t_bloq[masc].mean():.2f} without IRS  ->  "
+              f"{t_bloq_irs[masc].mean():.2f} with IRS  [b/s/Hz]")
 
-    print("\n[7] Retardo de actuación:")
+    print("\n[7] Actuation delay:")
     for v in g_tau:
         g, t = g_tau[v], t_tau[v]
         bajo = np.where(g < 0.5)[0]
         tau50 = retardos[bajo[0]] * 1e3 if bajo.size else float("nan")
-        print(f"      v = {v:.1f} m/s: H cae al "
-              f"{100 * np.interp(0.050, retardos, g):.0f}% con tau = 50 ms; "
-              f"al 50% con tau = {tau50:.0f} ms; "
-              f"tasa {t[0]:.2f} -> {np.interp(0.050, retardos, t):.2f} b/s/Hz")
+        print(f"      v = {v:.1f} m/s: H drops to "
+              f"{100 * np.interp(0.050, retardos, g):.0f}% with tau = 50 ms; "
+              f"to 50% with tau = {tau50:.0f} ms; "
+              f"rate {t[0]:.2f} -> {np.interp(0.050, retardos, t):.2f} b/s/Hz")
 
 
 if __name__ == "__main__":
