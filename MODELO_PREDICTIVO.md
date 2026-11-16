@@ -149,6 +149,72 @@ considera episodios como unidades independientes, no ventanas correlacionadas.
 Una sola semilla de entrenamiento no permite concluir significancia de una
 mejora entre redes; conviene repetir semillas antes de publicar esa conclusion.
 
+## Pruebas de movilidad inesperada sin reentrenamiento
+
+```bash
+python evaluar_estres.py --checkpoint-dir resultados/experimento_sintetico --output resultados/estres_movilidad
+```
+
+El script lee la configuracion y las semillas de test del experimento guardado,
+carga los tres checkpoints en modo evaluacion y usa los seis controladores
+originales, sin modificar pesos ni reglas de decision. Requiere una carpeta de
+salida nueva. No genera train/val ni llama al entrenamiento. Guarda hashes SHA256
+antes y despues, versiones y hashes del codigo en `provenance.json`.
+
+Se evalua cada semilla de test en cinco escenarios emparejados:
+
+| Escenario | Perturbacion |
+|---|---|
+| normal | Trayectoria original; se verifica contra las trazas guardadas si existen |
+| sudden_stop | Posicion fija desde el evento en el ultimo punto observado antes de este |
+| stationary | Posicion fija desde t=0; la orientacion conserva la variacion original |
+| erratic | Giros horizontales de 90 a 180 grados cada 0.2 a 0.35 s desde el evento; misma rapidez previa, limitada por configuracion |
+| fall_proxy | Posicion horizontal fija, descenso de 0.85 a 0.25 m e inclinacion hasta horizontal en 0.5 s; queda fijo despues |
+
+El evento comienza por defecto en la muestra 60 (3 s), primera muestra alterada,
+y puede configurarse con `--event-index`. Los escenarios comparten el prefijo
+anterior al evento, salvo `stationary`. Conservan la trayectoria del bloqueador
+original y el ruido horizontal emparejado. Durante la caida se rotan juntas la
+normal verdadera y la observada, preservando el error angular de observacion.
+El bloqueador ya no sigue la nueva trayectoria cuando se altera el usuario;
+se mantiene fijo entre variantes para aislar la perturbacion. Su bloqueo puede
+cambiar porque cambia la geometria del receptor.
+
+Las decisiones se calculan con observaciones hasta t y se aplican en t+1. Se
+verifica igualdad exacta de todos los comandos anteriores al evento, incluido
+el que se aplica en la primera muestra afectada: ningun controlador puede
+anticipar un evento que aun no ha observado. `metrics_by_window.csv` separa todo
+el episodio, preevento, primer paso afectado, primeros 0.5 s, todo el periodo
+posterior y tramo desde evento + max(0.5 s, history*dt). Para posicion fija las
+ventanas son solo referencias temporales comunes, no un evento nuevo.
+`paired_differences.csv` incluye diferencias emparejadas frente al reactivo y
+frente al movimiento normal, con IC95 de tasa por bootstrap de episodios.
+No representa incertidumbre entre entrenamientos: se usa una sola semilla de
+entrenamiento. Las diferencias frente a normal incluyen cambios fisicos del
+canal; la comparacion de controladores dentro del mismo escenario los comparte.
+
+La salida aprendida sigue siendo angular: no se calcula un error de posicion
+predicha de la CNN-GRU. Las referencias de `alignment_reference.csv` orientan
+instantaneamente los espejos hacia la posicion verdadera de aplicacion, sin
+restricciones mecanicas, y tambien calculan el enlace solo LoS. Son diagnosticos
+no causales para distinguir desalineacion y perdida fisica por FOV/bloqueo;
+no son competidores, optimizadores globales ni cotas matematicas de tasa.
+
+La caida es una perturbacion cinematica, no una simulacion biomecanica ni una
+validacion de deteccion de caidas. Supone altura actual conocida sin ruido.
+Los mapas CNN no codifican altura del receptor; su residual geometrico si la
+usa, y `coord_gru` la recibe. Los baselines `constant_velocity` y `geometric_j`
+conservan su hipotesis original de altura nominal fija. Por ello, su ranking
+en la caida no aisla capacidad predictiva y debe leerse con esa limitacion.
+La inclinacion tambien puede sacar el receptor del campo de vision incluso con
+alineacion geometrica ideal. No se presupone superioridad de la CNN-GRU.
+
+La salida incluye `informe.md` en espanol, tres figuras PNG/PDF, tablas por
+ventana y episodio, referencias de alineacion y, para cada escenario, todas las
+trazas, estados verdaderos/observados y angulos aplicados del evaluador original.
+El informe global es la referencia para interpretar estos casos; los reportes
+por escenario del evaluador original contienen la descripcion generica.
+
 ## Discrepancia del informe que debe corregirse
 
 La ecuacion (6) del PDF asigna beta a la componente vertical y usa arcsin para

@@ -1,0 +1,25 @@
+% Replace the existing Results and analysis section with this block.
+% Sources: resultados/estres_movilidad/metrics_by_window.csv (window=after),
+% alignment_by_window.csv, config.json and provenance.json.
+\section{Results and analysis}
+\label{sec:resultados}
+
+Without retraining, we evaluated 16 held-out synthetic episodes per
+scenario, with a 50~ms control delay. Over the common 3.00--5.95~s
+window, CNN--GRU achieved 9.57~bits/s/Hz during normal motion,
+compared with 9.64 for constant-velocity extrapolation.
+Sudden stopping, stationary positioning and erratic motion yielded
+9.69, 9.33 and 9.60~bits/s/Hz, respectively, without outperforming
+reactive control.
+
+The simulated fall, implemented as receiver descent and tilt,
+reduced the CNN--GRU rate to 5.83~bits/s/Hz, with 43.96\%
+of intervals below $R_{\min}=5$~bits/s/Hz; reactive control achieved
+6.02~bits/s/Hz. The separate cylindrical blocker retained its
+original trajectory across scenarios. Even instantaneous geometric
+alignment retained 43.54\% outage, indicating that physical channel
+limitations dominate this degradation. Constant-velocity control
+reached only 1.60~bits/s/Hz in this case, but its fixed-height
+assumption confounds the comparison. These results assess
+communication robustness under synthetic perturbations; they do
+not validate fall or anomaly detection.

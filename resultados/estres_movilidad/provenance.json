@@ -1,0 +1,100 @@
+{
+  "checkpoint_dir": "C:\\Users\\56932\\Documents\\USM\\6to-A\u00f1o\\2do Semestre\\IPD446\\st-prediction-irs-vlc\\resultados\\experimento_sintetico",
+  "training_performed": false,
+  "checkpoints": {
+    "cnn_gru": {
+      "path": "C:\\Users\\56932\\Documents\\USM\\6to-A\u00f1o\\2do Semestre\\IPD446\\st-prediction-irs-vlc\\resultados\\experimento_sintetico\\cnn_gru.pt",
+      "sha256_before": "cbd80b2d9903e75a433fe6b5e144dbae5f321ec3e91e5dbfdec86b84b92c8b23",
+      "selected_epoch": 24,
+      "validation_mse_scaled": 0.315013444849423,
+      "sha256_after": "cbd80b2d9903e75a433fe6b5e144dbae5f321ec3e91e5dbfdec86b84b92c8b23"
+    },
+    "coord_gru": {
+      "path": "C:\\Users\\56932\\Documents\\USM\\6to-A\u00f1o\\2do Semestre\\IPD446\\st-prediction-irs-vlc\\resultados\\experimento_sintetico\\coord_gru.pt",
+      "sha256_before": "1e0bc5e2113337929f4b10d22711a3a5c963066b0a1561c0ec30d8249c827ade",
+      "selected_epoch": 55,
+      "validation_mse_scaled": 0.17724483673061645,
+      "sha256_after": "1e0bc5e2113337929f4b10d22711a3a5c963066b0a1561c0ec30d8249c827ade"
+    },
+    "cnn": {
+      "path": "C:\\Users\\56932\\Documents\\USM\\6to-A\u00f1o\\2do Semestre\\IPD446\\st-prediction-irs-vlc\\resultados\\experimento_sintetico\\cnn.pt",
+      "sha256_before": "42eebda1478ad90cd8c935a900f8f74e42713e589238a0c6e4504ed746bbf893",
+      "selected_epoch": 2,
+      "validation_mse_scaled": 0.36981687659309026,
+      "sha256_after": "42eebda1478ad90cd8c935a900f8f74e42713e589238a0c6e4504ed746bbf893"
+    }
+  },
+  "test_seeds": [
+    20261179,
+    20261180,
+    20261181,
+    20261182,
+    20261183,
+    20261184,
+    20261185,
+    20261186,
+    20261187,
+    20261188,
+    20261189,
+    20261190,
+    20261191,
+    20261192,
+    20261193,
+    20261194
+  ],
+  "scenarios": [
+    "normal",
+    "sudden_stop",
+    "stationary",
+    "erratic",
+    "fall_proxy"
+  ],
+  "intervention": {
+    "event_index": 60,
+    "event_time_s": 3.0,
+    "last_unperturbed_time_s": 2.95,
+    "fall_steps": 10,
+    "fall_duration_s": 0.5,
+    "fall_end_index": 69,
+    "fall_initial_height_m": 0.85,
+    "fall_final_height_m": 0.25,
+    "erratic_turn_interval_s": [
+      0.2,
+      0.35
+    ],
+    "blocker_policy": "original trajectory unchanged in every scenario",
+    "position_noise_policy": "reuse original XY observation residual, then clip",
+    "orientation_noise_policy": "rotate original observed and true normals together",
+    "height_observation_policy": "current true height is known without noise"
+  },
+  "python": "3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "numpy": "2.0.0",
+  "torch": "2.8.0+cpu",
+  "device": "cpu",
+  "source_sha256": {
+    "evaluar_estres.py": "a14516888400e6af5c961405043dba0362636de59a6213a9af2622794d01b0a1",
+    "prediccion/stress.py": "c56f6cb237d57a153e2a01b857f79cbd2e1bed220b4a5157b40b01b19a15e484",
+    "prediccion/stress_plots.py": "a70735022486e3cf360f3068c56c7003b5a65a24a84e226f8fef1ca82ff057ac",
+    "prediccion/stress_report.py": "4dacba6921dc0c8b6315d8e1880e0652a22355dc3eed817159bf9ee161138471",
+    "prediccion/data.py": "33a43cb28567c4a94f4fedacdd3583e4b09311ed14bfdf7df1840a8cd3540a06",
+    "prediccion/models.py": "75113984bed42d89525b17b352200da93bdc4677cbc8370b2d84f2fb0f8b72f7",
+    "prediccion/experiment.py": "c052eb69deb870bd3861bf455654239327942c3377202df155bb247942b7c787",
+    "prediccion/physics.py": "8dc95e47588ebbc0a777e416cf06c5f64fba1cd365ff88802e70d993135c6d98",
+    "ris_vlc.py": "9c101c1e82786f444d5dfe95bd5e44c300cbca5ce78c85605e5ad1634d8f7d4a"
+  },
+  "causal_prefix_verified": true,
+  "original_normal_verification": {
+    "available": true,
+    "reproduced": true,
+    "max_absolute_differences": {
+      "rate": 0.0,
+      "h_irs": 0.0,
+      "blocked": 0.0,
+      "movement_deg": 0.0,
+      "angle_rmse_deg": 0.0,
+      "j": 0.0
+    }
+  },
+  "checkpoints_unchanged": true
+}

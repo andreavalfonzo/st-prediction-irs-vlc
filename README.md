@@ -15,6 +15,18 @@ python entrenar.py --output resultados/experimento_nuevo --noise-sweep
 La evaluacion separa trayectorias de entrenamiento/validacion/test y guarda
 pesos, metricas, trazas y figuras. Son datos sinteticos en una geometria fija.
 
+Para evaluar movimientos inesperados **sin reentrenar**, usando los pesos ya
+guardados del experimento completo:
+
+```bash
+python evaluar_estres.py --checkpoint-dir resultados/experimento_sintetico --output resultados/estres_movilidad
+```
+
+Compara movimiento normal, detencion repentina, posicion fija, giros erraticos
+y una caida cinematica simplificada. Genera `informe.md`, figuras PNG/PDF y
+metricas por ventana de evento; verifica causalidad y hashes de los pesos.
+El protocolo y sus limites se describen en [MODELO_PREDICTIVO.md](MODELO_PREDICTIVO.md).
+
 ## Simulacion fisica original
 
 Implementación numérica del modelo de canal para el Hito 2, con las pruebas de

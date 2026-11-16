@@ -1,0 +1,15 @@
+{
+  "source": "resultados/estres_movilidad/metrics_by_window.csv",
+  "source_sha256": "639dcb98ae3b2581ea8b0ef96ec03ac62a177727f8fa11068df64469e85e1f38",
+  "window": "after",
+  "window_seconds": [
+    3.0,
+    5.95
+  ],
+  "test_trajectories_per_scenario": 16,
+  "control_delay_ms": 50,
+  "rate_ci": "95% percentile bootstrap of whole test trajectories, 2000 resamples",
+  "outage_threshold_bits_s_hz": 5,
+  "paper_width_inches": 7.16,
+  "png_dpi": 600
+}

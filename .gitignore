@@ -1,222 +1,117 @@
-# Byte-compiled / optimized / DLL files
+# IRS-VLC: mantener código, documentación y resultados seleccionados.
+# Los archivos ignorados permanecen en el equipo; no se incluyen en git add.
+
+# --- Entornos de Python y configuración local ---
+.venv/
+venv/
+env/
+ENV/
+.Python
+.env
+.env.*
+!.env.example
+!.env.sample
+.envrc
+.pypirc
+
+# --- Cachés, bytecode y paquetes generados ---
 __pycache__/
 *.py[codz]
 *$py.class
-
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
+.cache/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.ipynb_checkpoints/
 .eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
 *.egg-info/
-.installed.cfg
 *.egg
-MANIFEST
+/build/
+/dist/
 
-# PyInstaller
-#   Usually these files are written by a python script from a template
-#   before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
+# --- Archivos generados por pruebas y cobertura ---
 .tox/
 .nox/
 .coverage
 .coverage.*
-.cache
-nosetests.xml
 coverage.xml
-*.cover
-*.py.cover
+htmlcov/
 .hypothesis/
-.pytest_cache/
-cover/
 
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
+# --- Temporales, copias de respaldo y archivos del editor/sistema ---
+/tmp/
+/temp/
+*.tmp
+*.temp
+*.bak
 *.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-.pybuilder/
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
-
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-# Pipfile.lock
-
-# UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-# uv.lock
-
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-# poetry.lock
-# poetry.toml
-
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#   pdm recommends including project-wide configuration in pdm.toml, but excluding .pdm-python.
-#   https://pdm-project.org/en/latest/usage/project/#working-with-version-control
-# pdm.lock
-# pdm.toml
-.pdm-python
-.pdm-build/
-
-# pixi
-#   Similar to Pipfile.lock, it is generally recommended to include pixi.lock in version control.
-# pixi.lock
-#   Pixi creates a virtual environment in the .pixi directory, just like venv module creates one
-#   in the .venv directory. It is recommended not to include this directory in version control.
-.pixi
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# Redis
-*.rdb
-*.aof
-*.pid
-
-# RabbitMQ
-mnesia/
-rabbitmq/
-rabbitmq-data/
-
-# ActiveMQ
-activemq-data/
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.envrc
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# PyCharm
-#   JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#   be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#   and can be added to the global gitignore or merged into this file.  For a more nuclear
-#   option (not recommended) you can uncomment the following to ignore the entire idea folder.
-# .idea/
-
-# Abstra
-#   Abstra is an AI-powered process automation framework.
-#   Ignore directories containing user credentials, local state, and settings.
-#   Learn more at https://abstra.io/docs
-.abstra/
-
-# Visual Studio Code
-#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
-#   that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#   and can be added to the global gitignore or merged into this file. However, if you prefer, 
-#   you could uncomment the following to ignore the entire vscode folder
-# .vscode/
-# Temporary file for partial code execution
+*~
+*.swp
+*.swo
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
 tempCodeRunnerFile.py
 
-# Ruff stuff:
-.ruff_cache/
+# --- Auxiliares de LaTeX (conservar fuentes .tex/.bib y PDF finales) ---
+*.aux
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc
+*.out
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.dvi
 
-# PyPI configuration file
-.pypirc
+# --- Pesos entrenados, matrices y archivos comprimidos pesados ---
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+*.rar
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.tar.xz
 
-# Marimo
-marimo/_static/
-marimo/_lsp/
-__marimo__/
+# --- Simulaciones: excluir corridas completas y conservar evidencia resumida ---
+# Estos datos permiten regenerar la figura y comprobar las cifras del paper.
+# Las trazas por instante, los checkpoints y las carpetas por escenario se omiten.
+/resultados/*
+!/resultados/estres_movilidad/
+/resultados/estres_movilidad/*
+!/resultados/estres_movilidad/config.json
+!/resultados/estres_movilidad/provenance.json
+!/resultados/estres_movilidad/metrics_by_window.csv
+!/resultados/estres_movilidad/episode_metrics.csv
+!/resultados/estres_movilidad/paired_differences.csv
+!/resultados/estres_movilidad/alignment_by_window.csv
+!/resultados/estres_movilidad/informe.md
+# Conservar las imágenes que el informe enlaza; omitir los PDF duplicados.
+!/resultados/estres_movilidad/respuesta_evento.png
+!/resultados/estres_movilidad/resumen_postevento.png
+!/resultados/estres_movilidad/trayectorias_estres.png
 
-# Streamlit
-.streamlit/secrets.toml
-
-# Datos sinteticos, checkpoints y resultados regenerables del modelo predictivo
-resultados/
-tmp/pdfs/
+# --- Entregables seleccionados para el paper ---
+# Añadir aquí futuras versiones finales; no ignorar PDF/PNG/CSV globalmente.
+# La carpeta figuras/ también se conserva para los gráficos del modelo físico.
+/output/*
+!/output/pdf/
+/output/pdf/*
+!/output/pdf/mobility_stress_results_en.pdf
+!/output/pdf/mobility_stress_results_en.png
+!/output/pdf/mobility_stress_results_en.tex
+!/output/pdf/mobility_stress_results_en_data.csv
+!/output/pdf/mobility_stress_results_en_source.json

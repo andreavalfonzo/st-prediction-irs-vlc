@@ -1,0 +1,8 @@
+% Place the PDF beside the main .tex file, then insert this block
+% in Results and analysis. figure* spans both IEEE columns.
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{mobility_stress_results_en.pdf}
+  \caption{Link performance over 3.00--5.95~s across 16 simulated test trajectories per scenario, without retraining (50~ms control delay). Error bars show 95\% bootstrap confidence intervals across trajectories; outage is the fraction of intervals below 5~bits/s/Hz. The stationary case starts at $t=0$. The simulated fall changes receiver height and orientation; constant-velocity control retains the nominal height.}
+  \label{fig:mobility_stress}
+\end{figure*}
