@@ -1,0 +1,176 @@
+{
+ "parametros_modelo": 60492,
+ "error_prediccion_1s_cm": {
+  "cnn_gru": 8.38315801237077,
+  "velocidad_constante": 19.880378361724762
+ },
+ "horas_normales_evaluadas": 3.024611111111111,
+ "alerta": {
+  "cnn_gru": {
+   "umbral": 0.3005290795937827,
+   "falsas_por_hora": 1.9837260988556829,
+   "caida": {
+    "deteccion": 0.925,
+    "retardo_mediano_s": 1.8
+   },
+   "detencion": {
+    "deteccion": 0.775,
+    "retardo_mediano_s": 1.5
+   },
+   "deambulacion": {
+    "deteccion": 0.85,
+    "retardo_mediano_s": 2.8000000000000003
+   },
+   "marcha_lenta": {
+    "deteccion": 0.0,
+    "retardo_mediano_s": null
+   }
+  },
+  "cv": {
+   "umbral": 0.321512733365071,
+   "falsas_por_hora": 0.0,
+   "caida": {
+    "deteccion": 0.7,
+    "retardo_mediano_s": 1.6
+   },
+   "detencion": {
+    "deteccion": 0.0,
+    "retardo_mediano_s": null
+   },
+   "deambulacion": {
+    "deteccion": 0.4,
+    "retardo_mediano_s": 4.2
+   },
+   "marcha_lenta": {
+    "deteccion": 0.0,
+    "retardo_mediano_s": null
+   }
+  },
+  "regla": {
+   "umbral": 3.0,
+   "falsas_por_hora": 0.0,
+   "caida": {
+    "deteccion": 0.9,
+    "retardo_mediano_s": 4.800000000000001
+   },
+   "detencion": {
+    "deteccion": 1.0,
+    "retardo_mediano_s": 4.3
+   },
+   "deambulacion": {
+    "deteccion": 0.0,
+    "retardo_mediano_s": null
+   },
+   "marcha_lenta": {
+    "deteccion": 0.0,
+    "retardo_mediano_s": null
+   }
+  }
+ },
+ "deteccion_a_igual_falsas_por_hora": {
+  "cv": {
+   "caida": 0.75,
+   "detencion": 0.025,
+   "deambulacion": 0.45,
+   "marcha_lenta": 0.0
+  },
+  "regla": {
+   "caida": 0.975,
+   "detencion": 1.0,
+   "deambulacion": 0.075,
+   "marcha_lenta": 0.0
+  }
+ },
+ "enlace": {
+  "normal": {
+   "ideal": {
+    "tasa": 8.825059699585207,
+    "indisponibilidad": 20.156427758816836
+   },
+   "reactivo": {
+    "tasa": 7.512872778607958,
+    "indisponibilidad": 25.409556313993175
+   },
+   "cv": {
+    "tasa": 7.7220463085502065,
+    "indisponibilidad": 24.382821387940844
+   },
+   "cnn_gru": {
+    "tasa": 7.953504022916745,
+    "indisponibilidad": 24.18941979522184
+   }
+  },
+  "caida": {
+   "ideal": {
+    "tasa": 6.412082687848194,
+    "indisponibilidad": 41.50123728347539
+   },
+   "reactivo": {
+    "tasa": 1.0824063183248607,
+    "indisponibilidad": 87.66565850976079
+   },
+   "cv": {
+    "tasa": 1.0813904662322606,
+    "indisponibilidad": 87.66565850976079
+   },
+   "cnn_gru": {
+    "tasa": 1.0808243999987999,
+    "indisponibilidad": 87.6711575474292
+   }
+  },
+  "detencion": {
+   "ideal": {
+    "tasa": 10.275779381674251,
+    "indisponibilidad": 6.907514450867051
+   },
+   "reactivo": {
+    "tasa": 9.463560944230963,
+    "indisponibilidad": 8.034682080924856
+   },
+   "cv": {
+    "tasa": 9.526022771012705,
+    "indisponibilidad": 7.930635838150289
+   },
+   "cnn_gru": {
+    "tasa": 8.787922826997274,
+    "indisponibilidad": 9.9364161849711
+   }
+  },
+  "deambulacion": {
+   "ideal": {
+    "tasa": 9.069694556511697,
+    "indisponibilidad": 12.816401328599245
+   },
+   "reactivo": {
+    "tasa": 7.7855246293612925,
+    "indisponibilidad": 18.961172832436148
+   },
+   "cv": {
+    "tasa": 7.768164424004852,
+    "indisponibilidad": 19.25323559729699
+   },
+   "cnn_gru": {
+    "tasa": 7.601669994468156,
+    "indisponibilidad": 20.547474516092084
+   }
+  },
+  "marcha_lenta": {
+   "ideal": {
+    "tasa": 8.622720908842012,
+    "indisponibilidad": 21.830399289165324
+   },
+   "reactivo": {
+    "tasa": 7.576473658634403,
+    "indisponibilidad": 25.534514355528405
+   },
+   "cv": {
+    "tasa": 7.716181936498654,
+    "indisponibilidad": 24.790359304714833
+   },
+   "cnn_gru": {
+    "tasa": 7.733350509914521,
+    "indisponibilidad": 25.49564058421725
+   }
+  }
+ }
+}
